@@ -3,12 +3,7 @@ import styled from "styled-components";
 import ProgressBar from "./ProgressBar";
 import SpeedOptions from "./SpeedOptions";
 import { BsFullscreen, BsFullscreenExit } from "react-icons/bs";
-import {
-  AiOutlineBackward,
-  AiOutlineForward,
-  AiFillPlayCircle,
-  AiFillPauseCircle,
-} from "react-icons/ai";
+import CenterButtonGroup from "./CenterButtonGroup";
 
 const Controler = ({
   progressChangeHandler,
@@ -55,23 +50,12 @@ const Controler = ({
 
   return (
     <SController>
-      <SButtonGroup>
-        <SJumbButton onClick={backwardHandler}>
-          <p>10초</p>
-          <AiOutlineBackward />
-        </SJumbButton>
-        <SPlayButton
-          onClick={() => {
-            playHandler();
-          }}
-        >
-          {nowPlaying ? <AiFillPauseCircle /> : <AiFillPlayCircle />}
-        </SPlayButton>
-        <SJumbButton onClick={forwardHandler}>
-          <p>10초</p>
-          <AiOutlineForward />
-        </SJumbButton>
-      </SButtonGroup>
+      <CenterButtonGroup
+        playHandler={playHandler}
+        nowPlaying={nowPlaying}
+        backwardHandler={backwardHandler}
+        forwardHandler={forwardHandler}
+      />
       <ProgressBar
         totalTime={totalTime}
         currentTime={currentTime}
@@ -99,40 +83,6 @@ const SController = styled.div`
   align-items: center;
   font-size: 1.6rem;
   background-color: rgba(0, 0, 0, 0.3);
-`;
-
-const SButtonGroup = styled.div`
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  align-items: center;
-`;
-
-const SPlayButton = styled.button`
-  margin: 0 5rem;
-  border: none;
-  background-color: transparent;
-  font-size: 5rem;
-  color: white;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-`;
-
-const SJumbButton = styled.button`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border: none;
-  background-color: transparent;
-  color: white;
-  cursor: pointer;
-  & svg {
-    font-size: 4rem;
-  }
 `;
 
 const SFullscreenButton = styled.button`
